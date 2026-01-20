@@ -1,0 +1,97 @@
+Веб-сервис комплексной лингвистической оценки текстов для авторов образовательного контента
+
+Описание
+
+TextInsight EDU — это веб-приложение, предназначенное для анализа текстов с помощью лингвистических метрик. Сервис помогает авторам образовательного контента оценить качество, читаемость и тональность своих текстов.
+
+Стек технологий
+
+Backend: Django 5.1
+Database: PostgreSQL / SQLite
+Data Processing: Pandas
+Visualization: Matplotlib
+Frontend: Bootstrap 5
+Server: PythonAnywhere
+
+Функциональные требования
+
+ 1. Управление пользователями
+
+- Регистрация и аутентификация через Django Admin
+- Профиль пользователя с датами создания и обновления
+
+2. Управление документами
+
+- Загрузка текстов (50-50000 символов)
+- Сохранение истории документов
+- Просмотр и удаление документов
+
+3. Лингвистический анализ
+
+- Читаемость: Flesch-Kincaid Index
+- Статистика: количество слов, средняя длина слова
+- Тональность: анализ положительных и отрицательных слов
+- Сохранение результатов**: в базу данных
+
+ 4. Интерфейс
+
+- Bootstrap 5 дизайн
+- Наследование шаблонов
+- Отзывчивая верстка
+- Административная панель Django
+
+ Модели данных
+
+
+UserProfile
+├── user (OneToOneField → User)
+├── created_at
+└── updated_at
+
+TextDocument
+├── user (ForeignKey → User)
+├── title
+├── content
+├── created_at
+└── updated_at
+
+LinguisticMetric
+├── name
+├── description
+└── created_at
+
+AnalysisResult
+├── document (ForeignKey → TextDocument)
+├── metric (ForeignKey → LinguisticMetric)
+├── value
+└── created_at
+
+API Routes
+
+- GET /documents/` — список документов
+- POST /documents/create/` — загрузка текста
+- GET /documents/<id>/` — результаты анализа
+- DELETE /documents/<id>/delete/` — удаление документа
+- GET /admin/` — административная панель
+
+Безопасность
+
+- Все секреты в .env
+- CSRF защита
+- Аутентификация обязательна
+- SQL инъекции предотвращены ORM
+
+ Деплой
+
+- Репозиторий: Git
+- Хостинг: PythonAnywhere
+- URL: https://fydj.pythonanywhere.com
+- Python 3.10+
+
+Требования к коду
+
+- Production-ready
+- Минимализм
+- Воспроизводимость
+- Без комментариев
+- Все секреты через .env
